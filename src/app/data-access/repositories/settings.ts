@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { remote } from 'electron';
-import { environment } from '../../../environments/environment';
+import { AppConfig } from '../../../environments/environment';
 
 export class Settings {
 
@@ -16,7 +16,7 @@ export class Settings {
 
     private static getPaths() {
 
-        if(environment.production){
+        if(AppConfig .production){
             this.dataSubFolder = '/';
             Settings.appPath = remote.app.getPath('userData');
         } else {

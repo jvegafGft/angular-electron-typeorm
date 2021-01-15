@@ -2,6 +2,27 @@
   <h1 class="title">
     {{ 'PAGES.HOME.TITLE' | translate }}
   </h1>
-
   <a routerLink="/detail">{{ 'PAGES.HOME.GO_TO_DETAIL' | translate }}</a>
+  <table class="table table-sm" aria-describedby="page-heading">
+    <thead>
+    <tr class="header-table-custom">
+      <th scope="col"><span>ID</span></th>
+      <th scope="col"><span>Firs Name</span></th>
+      <th scope="col"><span>Last Name</span></th>
+      <th scope="col"><span>Age</span></th>
+    </tr>
+    </thead>
+    <tbody *ngIf="users && users.length>0">
+    <tr *ngFor="let user of users">
+      <td class="settings-global-p">{{user.Id}}</td>
+      <td class="settings-global-p">{{user.FirstName}}</td>
+      <td class="settings-global-p">{{user.LastName}}</td>
+      <td class="settings-global-p">{{user.Age}}</td>
+    </tr>
+    </tbody>
+    <p *ngIf="!users || users.length===0" class="settings-global-p text-center align-content-center">No
+      data exists</p>
+  </table>
+
+  <button (click)="addUser()">ADD USER</button>
 </div>

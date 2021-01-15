@@ -1,11 +1,10 @@
 {
   "name": "angular-electron",
-  "version": "9.0.3",
+  "version": "0.0.1",
   "description": "Angular 11 with Electron (Typescript + SASS + Hot Reload)",
-  "homepage": "https://github.com/maximegris/angular-electron",
   "author": {
-    "name": "Maxime GRIS",
-    "email": "maxime.gris@gmail.com"
+    "name": "Edwin Bustamante",
+    "email": "edwinfcyt@gmail.com"
   },
   "keywords": [
     "angular",
@@ -40,7 +39,10 @@
     "version": "conventional-changelog -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md",
     "lint": "ng lint"
   },
-  "dependencies": {},
+  "dependencies": {
+    "sqlite3": "5.0.0",
+    "typeorm": "0.2.29"
+  },
   "devDependencies": {
     "@angular-builders/custom-webpack": "10.0.1",
     "@angular-devkit/build-angular": "0.1100.3",

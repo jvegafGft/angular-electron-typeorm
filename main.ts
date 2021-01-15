@@ -1,8 +1,9 @@
-import { app, BrowserWindow, screen } from 'electron';
+import {app, BrowserWindow, Menu, screen, shell} from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 
 let win: BrowserWindow = null;
+let winSettings: BrowserWindow = null;
 const args = process.argv.slice(1),
   serve = args.some(val => val === '--serve');
 
@@ -21,12 +22,11 @@ function createWindow(): BrowserWindow {
       nodeIntegration: true,
       allowRunningInsecureContent: (serve) ? true : false,
       contextIsolation: false,  // false if you want to run 2e2 test with Spectron
-      enableRemoteModule : true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
+      enableRemoteModule: true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
     },
   });
 
   if (serve) {
-
     win.webContents.openDevTools();
 
     require('electron-reload')(__dirname, {
@@ -42,15 +42,67 @@ function createWindow(): BrowserWindow {
     }));
   }
 
+  createMenuMain();
   // Emitted when the window is closed.
   win.on('closed', () => {
-    // Dereference the window object, usually you would store window
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     win = null;
   });
 
   return win;
+}
+
+function createWindowSettings(): BrowserWindow {
+
+  const electronScreen = screen;
+  const size = electronScreen.getPrimaryDisplay().workAreaSize;
+  // Create the browser window.
+  winSettings = new BrowserWindow({
+    title: "Settings",
+    parent: win,
+    width: 900,
+    height: 350,
+    center: true,
+    resizable: false,
+    frame: true,
+    movable: true,
+    transparent: false,
+    show: false,
+    webPreferences: {
+      nodeIntegration: true,
+      allowRunningInsecureContent: (serve) ? true : false,
+      contextIsolation: false,  // false if you want to run 2e2 test with Spectron
+      enableRemoteModule: true // true if you want to run 2e2 test  with Spectron or use remote module in renderer context (ie. Angular)
+    },
+  });
+
+  if (serve) {
+    winSettings.webContents.openDevTools();
+
+    require('electron-reload')(__dirname, {
+      electron: require(`${__dirname}/node_modules/electron`)
+    });
+    winSettings.loadURL('http://localhost:4200/#settings');
+
+  } else {
+    winSettings.loadURL(url.format({
+      pathname: path.join(__dirname, 'dist/index.html'),
+      protocol: 'file:',
+      slashes: true,
+      hash: 'settings'
+    }));
+  }
+  createMenuSetting();
+  winSettings.once('ready-to-show', () => {
+    winSettings.show()
+  });
+
+  // Emitted when the window is closed.
+  winSettings.on('closed', () => {
+    createMenuMain();
+    winSettings = null;
+  });
+
+  return winSettings;
 }
 
 try {
@@ -80,4 +132,77 @@ try {
 } catch (e) {
   // Catch Error
   // throw e;
+}
+
+
+//SETTING MENUS
+function createMenuMain() {
+  var menu = Menu.buildFromTemplate([
+    {
+      label: app.name,
+      submenu: [
+        {role: 'about'},
+        {type: 'separator'},
+        {role: 'quit'}
+      ]
+    },
+    {
+      label: 'View',
+      submenu: [
+        {
+          label: 'View in Grid',
+          click: function () {
+
+          },
+          accelerator: 'CmdOrCtrl + Shift + G'
+        }
+      ]
+    },
+    {
+      label: 'Window',
+      submenu: [
+        {
+          label: 'Settings',
+          click: function () {
+            if (winSettings === null) {
+              createWindowSettings()
+            }
+          },
+          accelerator: 'CmdOrCtrl + Shift + S'
+        },
+        {
+          type: 'separator'
+        },
+        {role: 'minimize'},
+        {role: 'close'}
+      ]
+    },
+    {
+      label: 'Help',
+      submenu: [
+        {
+          label: 'About Clarity Ticker',
+          click: function () {
+            shell.openExternal('http://development1.utilitytalent.com:8080');
+          },
+          accelerator: 'CmdOrCtrl + Shift + H'
+        }
+      ]
+    },
+  ])
+  Menu.setApplicationMenu(menu);
+}
+
+function createMenuSetting() {
+  var menu = Menu.buildFromTemplate([
+    {
+      label: app.name,
+      submenu: [
+        {role: 'about'},
+        {type: 'separator'},
+        {role: 'quit'}
+      ]
+    }
+  ])
+  Menu.setApplicationMenu(menu);
 }

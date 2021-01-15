@@ -1,4 +1,14 @@
-[![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
+<div>
+  <a href="https://angular.io/">
+    <img style="display: inline-block" src="https://angular.io/assets/images/logos/angular/angular.svg" width="128" height="128">
+  </a>
+  <a href="http://typeorm.io/">
+    <img style="display: inline-block" src="https://github.com/typeorm/typeorm/raw/master/resources/logo_big.png" width="292" height="128">
+  </a>
+  <br>
+</div>
+
+[[![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
 
 ![Maintained][maintained-badge]
 [![Travis Build Status][build-badge]][build]
@@ -34,7 +44,7 @@ With this sample, you can :
 Clone this repository locally :
 
 ``` bash
-git clone https://github.com/maximegris/angular-electron.git
+git clone https://github.com/edwinbustamanterodriguez/angular-electron-typeorm.git
 ```
 
 Install dependencies with npm :
@@ -51,6 +61,12 @@ Please follow [Angular-cli documentation](https://github.com/angular/angular-cli
 
 ``` bash
 npm install -g @angular/cli
+```
+
+based on the project of :
+
+``` bash
+https://github.com/maximegris/angular-electron.git
 ```
 
 ## To build for development
@@ -99,14 +115,6 @@ Note: To make it work behind a proxy, you can add this proxy exception in your t
 `export {no_proxy,NO_PROXY}="127.0.0.1,localhost"`
 
 ## Branch & Packages version
-
-- Angular 4 & Electron 1 : Branch [angular4](https://github.com/maximegris/angular-electron/tree/angular4)
-- Angular 5 & Electron 1 : Branch [angular5](https://github.com/maximegris/angular-electron/tree/angular5)
-- Angular 6 & Electron 3 : Branch [angular6](https://github.com/maximegris/angular-electron/tree/angular6)
-- Angular 7 & Electron 3 : Branch [angular7](https://github.com/maximegris/angular-electron/tree/angular7)
-- Angular 8 & Electron 7 : Branch [angular8](https://github.com/maximegris/angular-electron/tree/angular8)
-- Angular 9 & Electron 7 : Branch [angular9](https://github.com/maximegris/angular-electron/tree/angular9)
-- Angular 10 & Electron 9 : Branch [angular10](https://github.com/maximegris/angular-electron/tree/angular9)
 - Angular 11 & Electron 10 : (master)
 
 [build-badge]: https://travis-ci.org/maximegris/angular-electron.svg?branch=master&style=style=flat-square
