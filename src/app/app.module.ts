@@ -4,7 +4,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-
+import {
+  DuiButtonModule,
+  DuiCheckboxModule,
+  DuiFormComponent,
+  DuiInputModule,
+  DuiRadioboxModule,
+  DuiSelectModule,
+  DuiWindowModule,
+  DuiIconModule,
+  DuiListModule,
+  DuiTableModule,
+  DuiAppModule,
+  DuiDialogModule,
+  DuiSliderModule,
+  DuiEmojiModule,
+} from '@marcj/angular-desktop-ui';
 import { AppRoutingModule } from './app-routing.module';
 
 // NG Translate
@@ -27,6 +42,22 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    DuiAppModule.forRoot(), //<--- important#
+    DuiWindowModule.forRoot(),
+
+    DuiCheckboxModule,
+    DuiButtonModule,
+    DuiInputModule,
+    DuiFormComponent,
+    DuiRadioboxModule,
+    DuiSelectModule,
+    DuiIconModule,
+    DuiListModule,
+    DuiTableModule,
+    DuiButtonModule,
+    DuiDialogModule,
+    DuiEmojiModule,
+    DuiSliderModule,
     CoreModule,
     SharedModule,
     HomeModule,

@@ -40,6 +40,8 @@
     "lint": "ng lint"
   },
   "dependencies": {
+    "@angular/cdk": "11.0.4",
+    "@marcj/angular-desktop-ui": "0.4.2",
     "sqlite3": "5.0.0",
     "typeorm": "0.2.29"
   },

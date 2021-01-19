@@ -14,7 +14,8 @@
   ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "../node_modules/@marcj/angular-desktop-ui/src/**/*.ts"
   ],
   "exclude": [
     "dist",

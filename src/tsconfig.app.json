@@ -8,7 +8,8 @@
   },
   "include": [
     "main.ts",
-    "polyfill.ts"
+    "polyfill.ts",
+    "../node_modules/@marcj/angular-desktop-ui/src/**/*.ts"
   ],
   "exclude": [
     "**/*.spec.ts"
