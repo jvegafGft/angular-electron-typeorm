@@ -1,1 +1,3 @@
-export * from './page-not-found/page-not-found.component';
+export * from './header/header.component';
+export * from './tracklist/tracklist.component';
+export * from './player/player.component';

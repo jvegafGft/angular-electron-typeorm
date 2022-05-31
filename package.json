@@ -40,12 +40,18 @@
     "lint": "ng lint"
   },
   "dependencies": {
-    "@angular/cdk": "11.0.4",
     "@marcj/angular-desktop-ui": "0.4.2",
     "sqlite3": "5.0.0",
-    "typeorm": "0.2.29"
+    "typeorm": "0.2.29",
+    "howler": "2.2.3",
+    "mousetrap": "1.6.5",
+    "music-metadata": "7.12.3",
+    "node-fetch": "3.2.4",
+    "node-id3": "0.2.3",
+    "recursive-readdir": "2.2.2"
   },
   "devDependencies": {
+    "@angular/cdk": "11.0.4",
     "@angular-builders/custom-webpack": "10.0.1",
     "@angular-devkit/build-angular": "0.1100.3",
     "@angular-eslint/builder": "0.8.0-beta.3",
