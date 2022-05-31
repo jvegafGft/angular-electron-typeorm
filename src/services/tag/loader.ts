@@ -4,7 +4,7 @@ export interface FileTags extends mm.ICommonTagsResult {
   duration: number;
 }
 
-const LoadTagsFromFile = async (file: string): Promise<?FileTags> => {
+const LoadTagsFromFile = async (file: string): Promise<FileTags | null> => {
   try {
     const metadata = await mm.parseFile(file);
     return { ...metadata.common, duration: metadata.format.duration };
