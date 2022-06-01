@@ -1,9 +1,10 @@
-import moment, { Moment } from 'moment';
+import moment from 'moment';
+
 
 export default class BeatportToken {
   private readonly accessToken: string;
 
-  private readonly expiresMoment: Moment;
+  private readonly expiresMoment: moment.Moment;
 
   constructor(accessToken: string, expiresIn: string) {
     this.accessToken = accessToken;
@@ -11,7 +12,7 @@ export default class BeatportToken {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private getExpiresMoment(expires: string): Moment {
+  private getExpiresMoment(expires: string): moment.Moment {
     return moment().add(Number(expires), 'seconds');
   }
 

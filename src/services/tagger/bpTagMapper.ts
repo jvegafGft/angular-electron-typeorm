@@ -1,5 +1,5 @@
-import { ResultTag } from '../../../shared/types/emusik';
-import { GetStringTokens } from '../../../shared/utils';
+import { ResultTag } from '../../shared/types/mt';
+import { GetStringTokens } from '../../shared/utils';
 
 const CreateTagResult = (result: any): ResultTag => {
   const tagTrackTitle: string = result.mix_name

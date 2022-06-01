@@ -1,17 +1,28 @@
-import { RepositoryModule } from "./../repository/repository.module";
-import {
-  HeaderComponent,
-  TracklistComponent,
-  PlayerComponent,
-} from "./components";
-import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
-import { TranslateModule } from "@ngx-translate/core";
-
-import { WebviewDirective } from "./directives/";
+import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { DuiButtonModule, DuiInputModule, DuiTableModule, DuiWindowModule } from "@marcj/angular-desktop-ui";
+import {
+  DuiButtonModule, DuiDialogModule,
+  DuiEmojiModule,
+  DuiFormComponent,
+  DuiIconModule,
+  DuiInputModule,
+  DuiListModule,
+  DuiRadioboxModule,
+  DuiSelectModule,
+  DuiSliderModule,
+  DuiTableModule,
+  DuiWindowModule
+} from "@marcj/angular-desktop-ui";
+import { TranslateModule } from "@ngx-translate/core";
+import { ElectronService, TrackRepositoryService } from "../core/services";
+import {
+  HeaderComponent, PlayerComponent, TracklistComponent
+} from "./components";
+import { WebviewDirective } from "./directives/";
+
+
+
 @NgModule({
   declarations: [
     WebviewDirective,
@@ -23,11 +34,19 @@ import { DuiButtonModule, DuiInputModule, DuiTableModule, DuiWindowModule } from
     CommonModule,
     TranslateModule,
     FormsModule,
-    RepositoryModule,
     DuiWindowModule.forRoot(),
     DuiButtonModule,
     DuiInputModule,
+    DuiFormComponent,
+    DuiRadioboxModule,
+    DuiSelectModule,
+    DuiIconModule,
+    DuiListModule,
     DuiTableModule,
+    DuiButtonModule,
+    DuiDialogModule,
+    DuiEmojiModule,
+    DuiSliderModule,
   ],
   exports: [
     TranslateModule,
@@ -37,5 +56,9 @@ import { DuiButtonModule, DuiInputModule, DuiTableModule, DuiWindowModule } from
     TracklistComponent,
     PlayerComponent,
   ],
+  providers: [
+    TrackRepositoryService,
+    ElectronService
+  ]
 })
 export class SharedModule {}

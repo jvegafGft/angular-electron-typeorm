@@ -1,10 +1,12 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { app, BrowserWindow, dialog, ipcMain } from "electron";
 import * as path from "path";
 import * as url from "url";
 import { GetFilesFrom } from "./src/services/fileManager";
+import FixTags from "./src/services/tagger/Tagger";
 import { GetTracks } from "./src/services/track/trackManager";
 
-let win: BrowserWindow = null;
+let win: BrowserWindow | null = null;
 
 const args = process.argv.slice(1),
   serve = args.some((val) => val === "--serve");
@@ -19,9 +21,10 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     minWidth: 1200,
     minHeight: 800,
-    frame: process.platform !== 'linux',
+    frame: process.platform !== "linux",
     backgroundColor: "#80FFFFFF",
     webPreferences: {
+      webSecurity: false,
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
       contextIsolation: false, // false if you want to run 2e2 test with Spectron
@@ -91,17 +94,19 @@ try {
   // throw e;
 }
 
-ipcMain.on('open-folder', () => {
+ipcMain.on("open-folder", () => {
   dialog
     .showOpenDialog(win, {
-      properties: ['openDirectory'],
+      properties: ["openDirectory"],
     })
-    .then((result) => {
-      if (!result.canceled) {
-        return GetFilesFrom(result.filePaths[0]);
-      }
-    })
-    .then((files: string[]) => GetTracks(files))
-    .then(newTracks => win.webContents.send("add-tracks", newTracks))
-    .catch(err => console.log(err));
+    .then((result) => GetFilesFrom(result.filePaths[0]))
+    .then((files) => GetTracks(files))
+    .then((newTracks) => win.webContents.send('new-tracks', newTracks))
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+ipcMain.on("fix-tags", (e, track) => {
+  FixTags(track).then((fixed) => win.webContents.send("update-track", fixed));
 });

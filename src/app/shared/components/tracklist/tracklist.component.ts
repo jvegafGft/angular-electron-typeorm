@@ -1,24 +1,30 @@
-import { Track } from '../../../../shared/models/Track';
-import { AudioService } from '../../../core/services/index';
-import Mousetrap from 'mousetrap';
-import { Component, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Output } from "@angular/core";
+import Mousetrap from "mousetrap";
+import { Observable } from "rxjs";
+import { Track } from "../../../../shared/types/mt";
+import { AudioService } from "../../../core/services/index";
+import { TrackRepositoryService } from "./../../../core/services/repository/track-repository.service";
 
 @Component({
-  selector: 'app-tracklist',
-  templateUrl: './tracklist.component.html',
-  styleUrls: ['./tracklist.component.scss']
+  selector: "app-tracklist",
+  templateUrl: "./tracklist.component.html",
+  styleUrls: ["./tracklist.component.scss"],
 })
 export class TracklistComponent implements AfterViewInit {
-  @Input() items: Track[];
-
   @Output() showDetail = new EventEmitter<Track>();
   @Output() menuActions = new EventEmitter<string>();
 
+  items: Track[] = [];
   selectedItems = [];
   selectedIndex: number;
   sortedItems: number[];
 
-  constructor(private audioServ: AudioService) {}
+  constructor(
+    private audioServ: AudioService,
+    private repository: TrackRepositoryService
+  ) {
+    this.repository.tracks.subscribe(tracks => this.items = tracks);
+  }
 
   ngAfterViewInit(): void {
     this.initShortcuts();
@@ -49,14 +55,18 @@ export class TracklistComponent implements AfterViewInit {
   }
 
   private initShortcuts(): void {
-    Mousetrap.bind('space', () => this.playTrack());
-    Mousetrap.bind('left', () => this.backSeekTrack());
-    Mousetrap.bind('right', () => this.advanceSeekTrack());
-    Mousetrap.bind('esc', () => this.unselect());
+    Mousetrap.bind("space", () => this.playTrack());
+    Mousetrap.bind("left", () => this.backSeekTrack());
+    Mousetrap.bind("right", () => this.advanceSeekTrack());
+    Mousetrap.bind("esc", () => this.unselect());
+    Mousetrap.bind("control+a", () => this.selectAll());
+
   }
 
   playTrack(): void {
-    if (this.selectedItems.length < 1) { return; }
+    if (this.selectedItems.length < 1) {
+      return;
+    }
     this.audioServ.play(this.selectedItems[0]);
   }
 

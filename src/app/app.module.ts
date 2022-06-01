@@ -1,37 +1,22 @@
-import { TrackRepositoryService } from './repository/services/track-repository.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import { HttpClient, HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { BrowserModule } from "@angular/platform-browser";
 import {
-  DuiButtonModule,
-  DuiCheckboxModule,
-  DuiFormComponent,
-  DuiInputModule,
-  DuiRadioboxModule,
-  DuiSelectModule,
-  DuiWindowModule,
-  DuiIconModule,
-  DuiListModule,
-  DuiTableModule,
-  DuiAppModule,
-  DuiDialogModule,
-  DuiSliderModule,
-  DuiEmojiModule,
-} from '@marcj/angular-desktop-ui';
-
+  DuiAppModule, DuiButtonModule, DuiDialogModule,
+  DuiEmojiModule, DuiFormComponent, DuiIconModule, DuiInputModule, DuiListModule, DuiRadioboxModule,
+  DuiSelectModule, DuiSliderModule, DuiTableModule, DuiWindowModule
+} from "@marcj/angular-desktop-ui";
 // NG Translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-
-import { AppComponent } from './app.component';
+import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
+import { AppComponent } from "./app.component";
+import { CoreModule } from "./core/core.module";
+import { SharedModule } from "./shared/shared.module";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
@@ -40,10 +25,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    DuiAppModule.forRoot(), //<--- important#
+    CoreModule,
+    SharedModule,
+    DuiAppModule.forRoot(),
     DuiWindowModule.forRoot(),
-
-    DuiCheckboxModule,
     DuiButtonModule,
     DuiInputModule,
     DuiFormComponent,
@@ -56,17 +41,14 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     DuiDialogModule,
     DuiEmojiModule,
     DuiSliderModule,
-    CoreModule,
-    SharedModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
-  providers: [TrackRepositoryService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,7 @@
-import { Track } from '../../../../shared/models/Track';
 import { Injectable } from '@angular/core';
 import { Howl } from 'howler';
 import { Observable, Subject } from 'rxjs';
+import { Track } from '../../../../shared/types/mt';
 
 
 @Injectable({

@@ -1,6 +1,7 @@
 <dui-table style="height: 100%;"
            borderless="true"
-           multiSelect [items]="items"
+           multiSelect
+           [items]="items"
            [selectable]="true"
            [(selected)]="selectedItems"
            (dbclick)="itemClicked()">

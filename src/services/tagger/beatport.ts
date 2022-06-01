@@ -4,7 +4,7 @@ import { handleResponse, handleError } from '../response';
 import BeatportToken from './BeaportToken';
 import { BuildBeatportQuery } from './querybuilder';
 import GetTagResults from './bpTagMapper';
-import { ResultTag } from '../../../shared/types/emusik';
+import { ResultTag } from '../../shared/types/mt';
 
 const URI_BASE = 'https://api.beatport.com/v4/catalog/search/?q=';
 

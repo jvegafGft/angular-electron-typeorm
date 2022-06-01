@@ -14,7 +14,10 @@
           "owner": "typescript",
           "source": "ts",
           "applyTo": "closedDocuments",
-          "fileLocation": ["relative", "${cwd}"],
+          "fileLocation": [
+            "relative",
+            "${cwd}"
+          ],
           "pattern": "$tsc",
           "background": {
             "activeOnStart": true,
@@ -22,6 +25,13 @@
             "endsPattern": "^.*Compiled successfully.*"
           }
         }
+      },
+      {
+        "type": "npm",
+        "script": "start",
+        "problemMatcher": [],
+        "label": "npm: start",
+        "detail": "npm-run-all -p electron:serve ng:serve"
       }
     ]
   }

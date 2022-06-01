@@ -4,10 +4,11 @@
     "module": "es2020",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
     "declaration": false,
     "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
@@ -23,7 +24,7 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
   ],
   "include": [
     "src/**/*.d.ts"

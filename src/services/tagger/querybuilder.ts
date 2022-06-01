@@ -1,6 +1,4 @@
-import { Sanitize } from '../../../shared/utils';
-
-/* eslint-disable import/prefer-default-export */
+import { Sanitize } from '../../shared/utils';
 const DELIMITER = '+';
 const SEARCH_TYPE = '&type=tracks';
 const ARTIST_FLAG = '&artist_name=';

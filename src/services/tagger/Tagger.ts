@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
-import { MatchResult, ResultTag, Track } from '../../../shared/types/emusik';
-import { GetStringTokens } from '../../../shared/utils';
+
+import { MatchResult, ResultTag, Track } from '../../shared/types/mt';
+import { GetStringTokens } from '../../shared/utils';
 import Update from '../track/updater';
 // import SearchYtTags from './youtube';
 import SearchTags from './beatport';

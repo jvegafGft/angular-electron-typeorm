@@ -1,8 +1,8 @@
-import { Track } from '../shared/models/Track';
+import { Track } from './../shared/types/mt';
+import { TrackRepositoryService } from './core/services';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../environments/environment';
-import { ElectronService } from './core/services';
 
 @Component({
   selector: 'app-root',
@@ -11,24 +11,15 @@ import { ElectronService } from './core/services';
 })
 export class AppComponent {
   constructor(
-    private els: ElectronService,
+    private repository: TrackRepositoryService,
     private translate: TranslateService
   ) {
     this.translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
-
-    if (els.isElectron) {
-      console.log(process.env);
-      console.log('Run in electron');
-      console.log('Electron ipcRenderer', this.els.ipcRenderer);
-      console.log('NodeJS childProcess', this.els.childProcess);
-    } else {
-      console.log('Run in browser');
-    }
   }
 
   openFolder(): void {
-    this.els.ipcRenderer.send('open-folder');
+    this.repository.openFolder();
   }
 
   fixTags(trks: Track[]): void {
@@ -44,7 +35,7 @@ export class AppComponent {
   }
 
   removeFile(t: Track): void {
-    console.log(`remove file: ${t.filename}`);
+    console.log(`remove file: ${t.title}`);
 
     // this.els.ipcRenderer.send('remove-file', t);
     // this.trackItems = this.tagsService.removeItem(this.tracklistComponent.selectedItems[0], this.trackItems);
@@ -73,6 +64,6 @@ export class AppComponent {
   }
 
   openDetailDialog(t: Track): void {
-    console.log(`open dialog: ${t.filename}`);
+    console.log(`open dialog: ${t.title}`);
   }
 }
