@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Track } from '../../../../shared/types/mt';
+import { AudioService } from '../../../core/services/audio/audio.service';
 
 @Component({
   selector: 'app-player',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerComponent implements OnInit {
 
-  constructor() { }
+  track: Track;
 
-  ngOnInit(): void {
+  constructor(private audioServ: AudioService) {
+
   }
 
+  ngOnInit(): void {
+    this.audioServ.audioTrack.subscribe(track => this.track = track);
+  }
+
+  seekTo(position: number): void {
+    this.audioServ.seekTo(position);
+  }
 }

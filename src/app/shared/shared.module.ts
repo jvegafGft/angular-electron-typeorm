@@ -15,7 +15,7 @@ import {
   DuiWindowModule
 } from "@marcj/angular-desktop-ui";
 import { TranslateModule } from "@ngx-translate/core";
-import { ElectronService, TrackRepositoryService } from "../core/services";
+import { AudioService, ElectronService, TrackRepositoryService } from "../core/services";
 import {
   HeaderComponent, PlayerComponent, TracklistComponent
 } from "./components";
@@ -58,7 +58,8 @@ import { WebviewDirective } from "./directives/";
   ],
   providers: [
     TrackRepositoryService,
-    ElectronService
+    ElectronService,
+    AudioService
   ]
 })
 export class SharedModule {}

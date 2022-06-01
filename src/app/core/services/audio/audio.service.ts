@@ -9,23 +9,25 @@ import { Track } from '../../../../shared/types/mt';
 })
 export class AudioService {
 
-  private audio: Howl;
-  private track$;
-  track: Track;
-  progress: number;
+  private _audio: Howl;
+  private _track: Track;
+  private _track$: Subject<Track> = new Subject();
+  public readonly audioTrack: Observable<Track> = this._track$.asObservable();
+  private _progrNumber = 0;
+  private _progress: Subject<number> = new Subject(this._progrNumber);
+  public readonly progress: Observable<number> = this._progress.asObservable();
   private intervalObj;
 
   constructor() {
-    this.track$ = new Subject<Track>();
   }
 
   play(track: Track): void {
-    if (track.id === this.track?.id && this.audio?.playing()) { this.stop(); return; }
-    if (this.audio?.playing()) { this.stop(); }
-    this.track = track;
-    this.track$.next(this.track);
-    this.audio = new Howl({
-      src: this.track.filepath,
+    if (track.id === this._track?.id && this._audio?.playing()) { this.stop(); return; }
+    if (this._audio?.playing()) { this.stop(); }
+    this._track = track;
+    this._track$.next(this._track);
+    this._audio = new Howl({
+      src: this._track.filepath,
       autoplay: true,
       html5: true,
       onload: () => {
@@ -40,34 +42,31 @@ export class AudioService {
 
   stop(): void {
     clearInterval(this.intervalObj);
-    this.audio.unload();
-    this.track = null;
-    this.track$.next(this.track);
-  }
-
-
-  getTrack$(): Observable<Track> {
-    return this.track$.asObservable();
+    this._audio.unload();
+    this._track = null;
+    this._track$.next(null);
   }
 
   seekTo(position: number): void {
-    this.progress = position;
-    const time = this.audio.duration() * (position / 100);
-    this.audio.seek(time);
+    this._progress.next(position);
+    this._progrNumber = position;
+    const time = this._audio.duration() * (position / 100);
+    this._audio.seek(time);
   }
 
   updateProgress(): void {
-    const seek = this.audio.seek();
-    this.progress = ( seek as number / this.audio.duration() ) * 100;
+    const seek: number = this._audio.seek();
+    this._progrNumber = ( seek / this._audio.duration() ) * 100;
+    this._progress.next(this._progrNumber);
   }
 
   seekBack(): void {
-    if (!this.audio?.playing()) { return; }
-    this.seekTo(this.progress - 10);
+    if (!this._audio?.playing()) { return; }
+    this.seekTo(this._progrNumber - 10);
   }
 
   seekAdv(): void {
-    if (!this.audio?.playing()) { return; }
-    this.seekTo(this.progress + 10);
+    if (!this._audio?.playing()) { return; }
+    this.seekTo(this._progrNumber + 10);
   }
 }
