@@ -3,7 +3,7 @@ import { GetStringTokens } from '../../shared/utils';
 
 const CreateTagResult = (result: any): ResultTag => {
   const tagTrackTitle: string = result.mix_name
-    ? `${result.name} (${result.mix_name})`
+    ? `${result.name as string} (${result.mix_name as string})`
     : result.name;
 
   const tagTrackArtists: string[] = result.artists.map(
@@ -19,7 +19,7 @@ const CreateTagResult = (result: any): ResultTag => {
   return {
     id: result.id,
     title: tagTrackTitle,
-    key: `${result.key.camelot_number}${result.key.camelot_letter}`,
+    key: result.key.camelot_number ? `${result.key.camelot_number as string}${result.key.camelot_letter as string}` : '',
     artist: tagTrackArtists.join(', '),
     album: result.album,
     year: result.publish_date.substring(0, 4),

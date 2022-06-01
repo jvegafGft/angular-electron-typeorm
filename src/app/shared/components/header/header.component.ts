@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TrackRepositoryService } from './../../../core/services/repository/track-repository.service';
 
 @Component({
   selector: 'app-header',
@@ -6,13 +7,19 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  @Output() onHeaderAction = new EventEmitter<string>();
 
-  constructor() {}
+  constructor(private repository: TrackRepositoryService) {}
 
   ngOnInit(): void {}
 
-  onAction(name: string): void {
-    this.onHeaderAction.emit(name);
+  onAction(action: string): void {
+    switch (action) {
+      case 'openFolder':
+        this.repository.openFolder();
+        break;
+      case 'findTagsOnline':
+        this.repository.fixAllTags();
+        break;
+    }
   }
 }

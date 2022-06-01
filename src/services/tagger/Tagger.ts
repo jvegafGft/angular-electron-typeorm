@@ -83,7 +83,10 @@ const FixTags = async (track: Track): Promise<Track> => {
     GetWebTrackInfo(track);
     return track;
   }
-  return Update(track, result.tag);
+
+  const updated = Update(track, result.tag);
+  console.log(`track updated: ${updated.title}`);
+  return updated;
 };
 
 export default FixTags;

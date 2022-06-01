@@ -107,6 +107,6 @@ ipcMain.on("open-folder", () => {
     });
 });
 
-ipcMain.on("fix-tags", (e, track) => {
+ipcMain.on("fix-tags", (_, track) => {
   FixTags(track).then((fixed) => win.webContents.send("update-track", fixed));
 });

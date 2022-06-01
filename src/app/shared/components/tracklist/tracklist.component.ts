@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Output } from "@angular/core";
 import Mousetrap from "mousetrap";
-import { Observable } from "rxjs";
 import { Track } from "../../../../shared/types/mt";
 import { AudioService } from "../../../core/services/index";
 import { TrackRepositoryService } from "./../../../core/services/repository/track-repository.service";
@@ -12,7 +11,6 @@ import { TrackRepositoryService } from "./../../../core/services/repository/trac
 })
 export class TracklistComponent implements AfterViewInit {
   @Output() showDetail = new EventEmitter<Track>();
-  @Output() menuActions = new EventEmitter<string>();
 
   items: Track[] = [];
   selectedItems = [];
@@ -50,8 +48,15 @@ export class TracklistComponent implements AfterViewInit {
     this.showDetail.emit();
   }
 
-  actionTrigged(selected: string): void {
-    this.menuActions.emit(selected);
+  actionTrigged(action: string): void {
+    switch (action) {
+      case 'findTags':
+        this.selectedItems.forEach(t => this.repository.fixTags(t));
+        break;
+      case 'removeFile':
+        this.selectedItems.forEach(t => this.repository.removeFile(t));
+        break;
+    }
   }
 
   private initShortcuts(): void {
