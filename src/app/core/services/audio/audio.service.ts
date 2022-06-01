@@ -3,7 +3,6 @@ import { Howl } from 'howler';
 import { Observable, Subject } from 'rxjs';
 import { Track } from '../../../../shared/types/mt';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +13,7 @@ export class AudioService {
   private _track$: Subject<Track> = new Subject();
   public readonly audioTrack: Observable<Track> = this._track$.asObservable();
   private _progrNumber = 0;
-  private _progress: Subject<number> = new Subject(this._progrNumber);
+  private _progress: Subject<number> = new Subject();
   public readonly progress: Observable<number> = this._progress.asObservable();
   private intervalObj;
 

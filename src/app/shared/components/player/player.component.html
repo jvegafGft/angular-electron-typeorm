@@ -1,4 +1,4 @@
 <ng-container *ngIf="track">
-  <dui-slider mini [min]="0" [max]="100" [ngModel]="audioServ.progress" (change)="seekTo($event)"></dui-slider>
+  <dui-slider (change)="seekTo($event)" [max]="100" [min]="0" [ngModel]="progress" mini></dui-slider>
 </ng-container>
 
