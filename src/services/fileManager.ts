@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 
 export const GetFilesFrom = (filePath: string): Promise<string[]> => {
+  console.log(filePath);
   return recursiveReadDir(filePath)
     .then(result => result.filter(file => path.extname(file).toLowerCase() === '.mp3'))
     .catch(err => {

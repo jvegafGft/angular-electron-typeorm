@@ -17,6 +17,10 @@ export class TrackRepositoryService {
     this.els.ipcRenderer.on('update-track', (_, t: Track) => this.updateTrack(t));
   }
 
+  openDevTracks(): void {
+    this.els.ipcRenderer.send('open-dev-tracks');
+  }
+
   removeFile(track: Track): void {
     const updated = this._tracks.filter(t => track.id !== t.id);
     this._tracks = updated;

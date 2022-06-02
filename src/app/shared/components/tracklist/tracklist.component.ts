@@ -23,6 +23,7 @@ export class TracklistComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initShortcuts();
+    this.repository.openDevTracks();
   }
 
   selectPrev(): void {

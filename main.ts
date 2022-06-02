@@ -5,6 +5,7 @@ import * as url from 'url';
 import { GetFilesFrom } from './src/services/fileManager';
 import FixTags from './src/services/tagger/Tagger';
 import { GetTracks } from './src/services/track/trackManager';
+import { Track } from './src/shared/types/mt';
 
 let win: BrowserWindow | null = null;
 
@@ -14,6 +15,15 @@ const args = process.argv.slice(1),
 const titleBar = () => {
   if (process.platform === 'darwin') return 'hidden';
   return 'default';
+};
+
+const createTracksFrom = (folderPath: string): Promise<Track[]> => {
+  return GetFilesFrom(folderPath)
+    .then(files => GetTracks(files))
+    .catch(err => {
+      console.log(err);
+      return Promise.reject(err);
+    });
 };
 
 function createWindow(): BrowserWindow {
@@ -91,13 +101,20 @@ try {
   // throw e;
 }
 
+ipcMain.on('open-dev-tracks', () => {
+  createTracksFrom('C:\\Users\\jevf\\My Private Documents\\test_data')
+    .then(newTracks => win.webContents.send('new-tracks', newTracks))
+    .catch(err => {
+      console.log(err);
+    });
+});
+
 ipcMain.on('open-folder', () => {
   dialog
     .showOpenDialog(win, {
       properties: ['openDirectory'],
     })
-    .then(result => GetFilesFrom(result.filePaths[0]))
-    .then(files => GetTracks(files))
+    .then(result => createTracksFrom(result.filePaths[0]))
     .then(newTracks => win.webContents.send('new-tracks', newTracks))
     .catch(err => {
       console.log(err);
