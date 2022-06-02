@@ -1,7 +1,6 @@
 import fetch from 'node-fetch';
 import { Artwork } from '../../shared/types/music-tagger';
 
-
 const GetArtwork = async (url: string): Promise<Artwork> => {
   url.replace(/[0-9]{3,}x[0-9]{3,}/, '500x500');
 

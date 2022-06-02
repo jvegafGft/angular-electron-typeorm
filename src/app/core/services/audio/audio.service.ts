@@ -4,10 +4,9 @@ import { Observable, Subject } from 'rxjs';
 import { Track } from '../../../../shared/types/mt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AudioService {
-
   private _audio: Howl;
   private _track: Track;
   private _track$: Subject<Track> = new Subject();
@@ -17,12 +16,16 @@ export class AudioService {
   public readonly progress: Observable<number> = this._progress.asObservable();
   private intervalObj;
 
-  constructor() {
-  }
+  constructor() {}
 
   play(track: Track): void {
-    if (track.id === this._track?.id && this._audio?.playing()) { this.stop(); return; }
-    if (this._audio?.playing()) { this.stop(); }
+    if (track.id === this._track?.id && this._audio?.playing()) {
+      this.stop();
+      return;
+    }
+    if (this._audio?.playing()) {
+      this.stop();
+    }
     this._track = track;
     this._track$.next(this._track);
     this._audio = new Howl({
@@ -31,7 +34,7 @@ export class AudioService {
       html5: true,
       onload: () => {
         this.seekTo(20);
-      }
+      },
     });
 
     this.intervalObj = setInterval(() => {
@@ -55,17 +58,21 @@ export class AudioService {
 
   updateProgress(): void {
     const seek: number = this._audio.seek();
-    this._progrNumber = ( seek / this._audio.duration() ) * 100;
+    this._progrNumber = (seek / this._audio.duration()) * 100;
     this._progress.next(this._progrNumber);
   }
 
   seekBack(): void {
-    if (!this._audio?.playing()) { return; }
+    if (!this._audio?.playing()) {
+      return;
+    }
     this.seekTo(this._progrNumber - 10);
   }
 
   seekAdv(): void {
-    if (!this._audio?.playing()) { return; }
+    if (!this._audio?.playing()) {
+      return;
+    }
     this.seekTo(this._progrNumber + 10);
   }
 }

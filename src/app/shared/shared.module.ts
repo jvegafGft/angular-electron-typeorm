@@ -1,8 +1,9 @@
-import { CommonModule } from "@angular/common";
-import { NgModule } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
-  DuiButtonModule, DuiDialogModule,
+  DuiButtonModule,
+  DuiDialogModule,
   DuiEmojiModule,
   DuiFormComponent,
   DuiIconModule,
@@ -12,24 +13,15 @@ import {
   DuiSelectModule,
   DuiSliderModule,
   DuiTableModule,
-  DuiWindowModule
-} from "@marcj/angular-desktop-ui";
-import { TranslateModule } from "@ngx-translate/core";
-import { AudioService, ElectronService, TrackRepositoryService } from "../core/services";
-import {
-  HeaderComponent, PlayerComponent, TracklistComponent
-} from "./components";
-import { WebviewDirective } from "./directives/";
-
-
+  DuiWindowModule,
+} from '@marcj/angular-desktop-ui';
+import { TranslateModule } from '@ngx-translate/core';
+import { AudioService, ElectronService, TrackRepositoryService } from '../core/services';
+import { HeaderComponent, PlayerComponent, TracklistComponent } from './components';
+import { WebviewDirective } from './directives/';
 
 @NgModule({
-  declarations: [
-    WebviewDirective,
-    HeaderComponent,
-    TracklistComponent,
-    PlayerComponent,
-  ],
+  declarations: [WebviewDirective, HeaderComponent, TracklistComponent, PlayerComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -48,18 +40,7 @@ import { WebviewDirective } from "./directives/";
     DuiEmojiModule,
     DuiSliderModule,
   ],
-  exports: [
-    TranslateModule,
-    WebviewDirective,
-    FormsModule,
-    HeaderComponent,
-    TracklistComponent,
-    PlayerComponent,
-  ],
-  providers: [
-    TrackRepositoryService,
-    ElectronService,
-    AudioService
-  ]
+  exports: [TranslateModule, WebviewDirective, FormsModule, HeaderComponent, TracklistComponent, PlayerComponent],
+  providers: [TrackRepositoryService, ElectronService, AudioService],
 })
 export class SharedModule {}

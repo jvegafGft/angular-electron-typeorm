@@ -1,13 +1,9 @@
 <dui-window [closable]="true" [maximizable]="true" [minimizable]="true">
   <app-header></app-header>
   <dui-window-content>
-    <app-tracklist
-      (showDetail)="openDetailDialog($event)"
-    ></app-tracklist>
+    <app-tracklist (showDetail)="openDetailDialog($event)"></app-tracklist>
   </dui-window-content>
-  <dui-window-footer>
-    This is the footer.
-  </dui-window-footer>
+  <dui-window-footer> This is the footer. </dui-window-footer>
   <!-- Info Dialog -->
   <!-- <app-info-dialog [visible]="infoDialog" [infoMessage]="infoMessage"></app-info-dialog> -->
   <!-- Detail Dialog -->

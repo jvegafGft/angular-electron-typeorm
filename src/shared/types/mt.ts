@@ -1,28 +1,28 @@
 export interface Track {
   id: string;
-  album?: string ;
-  artist?: string ;
+  album?: string;
+  artist?: string;
   bpm?: number;
-  genre?: string ;
-  key?: string ;
+  genre?: string;
+  key?: string;
   duration: number;
   time: string;
   filepath: string;
   title: string;
-  year?: number ;
+  year?: number;
 }
 
 export interface ResultTag {
   id: string;
-  album?: string ;
-  artist?: string ;
-  bpm?: number ;
-  genre?: string ;
-  key?: string ;
+  album?: string;
+  artist?: string;
+  bpm?: number;
+  genre?: string;
+  key?: string;
   duration: number;
   title: string;
-  year?: string ;
-  artworkUrl?: string ;
+  year?: string;
+  artworkUrl?: string;
   tokens: string[];
 }
 

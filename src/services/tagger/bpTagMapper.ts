@@ -6,9 +6,7 @@ const CreateTagResult = (result: any): ResultTag => {
     ? `${result.name as string} (${result.mix_name as string})`
     : result.name;
 
-  const tagTrackArtists: string[] = result.artists.map(
-    (artist: any): string => artist.name
-  );
+  const tagTrackArtists: string[] = result.artists.map((artist: any): string => artist.name);
 
   const tagValues = [...tagTrackArtists, result.name];
   if (result.mix_name) {
@@ -19,7 +17,9 @@ const CreateTagResult = (result: any): ResultTag => {
   return {
     id: result.id,
     title: tagTrackTitle,
-    key: result.key.camelot_number ? `${result.key.camelot_number as string}${result.key.camelot_letter as string}` : '',
+    key: result.key.camelot_number
+      ? `${result.key.camelot_number as string}${result.key.camelot_letter as string}`
+      : '',
     artist: tagTrackArtists.join(', '),
     album: result.album,
     year: result.publish_date.substring(0, 4),
@@ -32,7 +32,7 @@ const CreateTagResult = (result: any): ResultTag => {
 };
 
 const GetTagResults = (result: any[]): ResultTag[] => {
-  return result.map((track) => CreateTagResult(track));
+  return result.map(track => CreateTagResult(track));
 };
 
 export default GetTagResults;

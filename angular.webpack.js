@@ -25,7 +25,6 @@ module.exports = (config, options) => {
 }
 */
 
-
 const path = require('path');
 
 module.exports = {
@@ -33,7 +32,6 @@ module.exports = {
   externals: {
     typeorm: "require('typeorm')",
     sqlite3: "require('sqlite3')",
-
   },
   /*resolve: {
     alias: {

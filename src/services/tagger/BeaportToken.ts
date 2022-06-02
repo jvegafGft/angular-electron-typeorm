@@ -1,6 +1,5 @@
 import moment from 'moment';
 
-
 export default class BeatportToken {
   private readonly accessToken: string;
 

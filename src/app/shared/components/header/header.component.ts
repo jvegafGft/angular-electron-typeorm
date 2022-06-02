@@ -4,10 +4,9 @@ import { TrackRepositoryService } from './../../../core/services/repository/trac
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   constructor(private repository: TrackRepositoryService) {}
 
   ngOnInit(): void {}

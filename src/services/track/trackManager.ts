@@ -65,11 +65,11 @@ const ParseDuration = (duration: number | null): string => {
     const minutesStringified = minutes < 10 ? `0${minutes}` : minutes;
     const secondsStringified = seconds < 10 ? `0${seconds}` : seconds;
 
-    let result = hoursStringified > 0 ? `${hoursStringified}:` : "";
+    let result = hoursStringified > 0 ? `${hoursStringified}:` : '';
     result += `${minutesStringified}:${secondsStringified}`;
 
     return result;
   }
 
-  return "00:00";
+  return '00:00';
 };

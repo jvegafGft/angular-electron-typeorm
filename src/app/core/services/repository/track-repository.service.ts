@@ -1,19 +1,18 @@
-import { ElectronService } from "./../electron/electron.service";
-import { Injectable } from "@angular/core";
-import { Observable, Subject } from "rxjs";
-import { Track } from "../../../../shared/types/mt";
+import { ElectronService } from './../electron/electron.service';
+import { Injectable } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { Track } from '../../../../shared/types/mt';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class TrackRepositoryService {
-
   private _tracks: Track[] = [];
   private _tracks$: Subject<Array<Track>> = new Subject();
   public readonly tracks: Observable<Array<Track>> = this._tracks$.asObservable();
 
   constructor(private els: ElectronService) {
-    this.els.ipcRenderer.on('new-tracks',(_, tks: Track[]) => this.addTracks(tks));
+    this.els.ipcRenderer.on('new-tracks', (_, tks: Track[]) => this.addTracks(tks));
 
     this.els.ipcRenderer.on('update-track', (_, t: Track) => this.updateTrack(t));
   }
@@ -46,7 +45,8 @@ export class TrackRepositoryService {
     console.log(`track updated: ${track.title}`);
     const temp = this._tracks.map(t => {
       if (t.id === track.id) {
-        return {...t,
+        return {
+          ...t,
           title: track.title,
           artist: track.artist,
           album: track.album,
@@ -61,5 +61,4 @@ export class TrackRepositoryService {
     this._tracks = temp;
     this._tracks$.next(this._tracks);
   }
-
 }

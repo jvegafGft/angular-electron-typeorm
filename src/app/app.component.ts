@@ -7,13 +7,10 @@ import { AppConfig } from '../environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private repository: TrackRepositoryService,
-    private translate: TranslateService
-  ) {
+  constructor(private repository: TrackRepositoryService, private translate: TranslateService) {
     this.translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
   }

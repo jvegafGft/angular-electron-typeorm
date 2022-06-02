@@ -1,5 +1,5 @@
-import { Track, ResultTag } from "../../shared/types/mt";
-import { ParseDuration } from "../../shared/utils";
+import { Track, ResultTag } from '../../shared/types/mt';
+import { ParseDuration } from '../../shared/utils';
 
 const parseYear = (yearStr?: string): number | null => {
   if (!yearStr || yearStr.length !== 4) {
@@ -7,7 +7,6 @@ const parseYear = (yearStr?: string): number | null => {
   }
   return Number(yearStr);
 };
-
 
 const Update = (track: Track, tag: ResultTag): Track => {
   return {
@@ -25,4 +24,3 @@ const Update = (track: Track, tag: ResultTag): Track => {
 };
 
 export default Update;
-

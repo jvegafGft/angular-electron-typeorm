@@ -10,6 +10,7 @@ if (AppConfig.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule, {
-    preserveWhitespaces: false
+    ngZone: 'noop',
+    preserveWhitespaces: false,
   })
   .catch(err => console.error(err));
