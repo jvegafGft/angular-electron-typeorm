@@ -1,5 +1,6 @@
+import { FileTags } from './../tag/loader';
 import path from 'path';
-import { Track } from '../../shared/types/mt';
+import { Artwork, Track } from '../../shared/types/mt';
 import LoadTagsFromFile from '../tag/loader';
 import { v4 as uuid } from 'uuid';
 
@@ -21,6 +22,7 @@ const CreateTrack = async (file: string): Promise<Track | null> => {
     filepath: file,
     title: trackTitle(tags.title, file),
     year: tags.year,
+    artwork: GetArtwork(tags),
   };
   return track;
 };
@@ -72,4 +74,15 @@ const ParseDuration = (duration: number | null): string => {
   }
 
   return '00:00';
+};
+
+const GetArtwork = (tags: FileTags): Artwork | null => {
+  if (!tags.picture || tags.picture.length === 0) return null;
+  const pic = tags.picture[0];
+  return {
+    mime: pic.format,
+    type: { id: 3, name: pic.type },
+    description: pic.description,
+    imageBuffer: pic.data,
+  } as Artwork;
 };

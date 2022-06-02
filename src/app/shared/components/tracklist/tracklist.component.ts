@@ -42,8 +42,8 @@ export class TracklistComponent implements AfterViewInit {
     this.selectedItems = [this.items[index]];
   }
 
-  itemClicked(): void {
-    this.showDetail.emit();
+  itemClicked(track: Track): void {
+    this.showDetail.emit(track);
   }
 
   actionTrigged(action: string): void {

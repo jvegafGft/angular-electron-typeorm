@@ -1,0 +1,34 @@
+  <!-- Detail Dialog -->
+  <dui-dialog [width]="600" [visible]="visible">
+    <dui-form>
+        <dui-form-row label="Title">
+          <dui-input [(ngModel)]="item.title"></dui-input>
+        </dui-form-row>
+        <dui-form-row label="Artist">
+          <dui-input [(ngModel)]="item.artist"></dui-input>
+        </dui-form-row>
+        <dui-form-row label="Album">
+          <dui-input [(ngModel)]="item.album"></dui-input>
+        </dui-form-row>
+        <dui-form-row label="Genre">
+          <dui-input [(ngModel)]="item.genre"></dui-input>
+        </dui-form-row>
+        <dui-form-row label="BPM">
+          <dui-input [(ngModel)]="item.bpm"></dui-input>
+        </dui-form-row>
+        <dui-form-row label="Year">
+          <dui-input [(ngModel)]="item.year"></dui-input>
+        </dui-form-row>
+        <dui-form-row label="Key">
+          <dui-input [(ngModel)]="item.key"></dui-input>
+        </dui-form-row>
+      </dui-form>
+      <div id="cover">
+        <img (click)="artClicked()" [src]="coverArt()" width="250" height="250" >
+      </div>
+    <dui-dialog-actions>
+      <dui-button style="margin-right: 50px;" (click)="findTagsOnline()">Find Tags online</dui-button>
+      <dui-button closeDialog (click)="onCloseAction()" style="margin-right: 20px;">Close</dui-button>
+      <dui-button (click)="saveChanges()" primary closeDialog>Save Changes</dui-button>
+    </dui-dialog-actions>
+  </dui-dialog>

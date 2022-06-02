@@ -1,5 +1,6 @@
 import { Track, ResultTag } from '../../shared/types/mt';
 import { ParseDuration } from '../../shared/utils';
+import GetArtwork from './artFetcher';
 
 const parseYear = (yearStr?: string): number | null => {
   if (!yearStr || yearStr.length !== 4) {
@@ -8,7 +9,9 @@ const parseYear = (yearStr?: string): number | null => {
   return Number(yearStr);
 };
 
-const Update = (track: Track, tag: ResultTag): Track => {
+const Update = async (track: Track, tag: ResultTag): Promise<Track> => {
+  console.log('fixed', tag.title);
+
   return {
     ...track,
     title: tag.title,
@@ -20,6 +23,7 @@ const Update = (track: Track, tag: ResultTag): Track => {
     duration: tag.duration,
     time: ParseDuration(tag.duration),
     year: parseYear(tag.year),
+    artwork: tag.artworkUrl ? await GetArtwork(tag.artworkUrl) : null,
   };
 };
 

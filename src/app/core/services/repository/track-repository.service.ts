@@ -39,6 +39,10 @@ export class TrackRepositoryService {
     this.els.ipcRenderer.send('fix-tags', track);
   }
 
+  getTrack(trackId: string): Track {
+    return this._tracks.find(t => t.id === trackId);
+  }
+
   private addTracks(trks: Track[]): void {
     console.log(`total tracks: ${trks.length}`);
     this._tracks = trks;

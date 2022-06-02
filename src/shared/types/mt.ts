@@ -10,6 +10,7 @@ export interface Track {
   filepath: string;
   title: string;
   year?: number;
+  artwork?: Artwork;
 }
 
 export interface ResultTag {
@@ -27,9 +28,9 @@ export interface ResultTag {
 }
 
 export interface Artwork {
-  mime: string;
+  mime?: string;
   type: { id: number; name: string };
-  description: string;
+  description?: string;
   imageBuffer: Buffer;
 }
 

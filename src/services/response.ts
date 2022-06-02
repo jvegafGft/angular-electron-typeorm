@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 import { AxiosResponse } from 'axios';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

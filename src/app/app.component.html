@@ -7,6 +7,14 @@
   <!-- Info Dialog -->
   <!-- <app-info-dialog [visible]="infoDialog" [infoMessage]="infoMessage"></app-info-dialog> -->
   <!-- Detail Dialog -->
+  <app-detail-dialog
+  *ngIf="trackDetailed !== null"
+    [item]="trackDetailed"
+    (onClickCover)="fetchDetailArtworks()"
+    (onDetailFixTags)="onDetailFixTags()"
+    (onSaveChanges)="onSaveChanges()"
+    (onCloseDetail)="onCloseDetail()"
+  ></app-detail-dialog>
   <!-- <dui-dialog *ngIf="detailDialog" [(visible)]="detailDialog" [width]="600">
     <app-detail
       [item]="tracklistComponent.selectedItems[0]"

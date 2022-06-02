@@ -122,5 +122,7 @@ ipcMain.on('open-folder', () => {
 });
 
 ipcMain.on('fix-tags', (_, track) => {
-  FixTags(track).then(fixed => win.webContents.send('update-track', fixed));
+  FixTags(track).then(fixed => {
+    win.webContents.send('update-track', fixed);
+  });
 });

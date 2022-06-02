@@ -5,7 +5,7 @@
   [items]="items"
   [selectable]="true"
   [(selected)]="selectedItems"
-  (dbclick)="itemClicked()"
+  (dbclick)="itemClicked($event)"
 >
   <dui-dropdown duiTableCustomRowContextMenu>
     <dui-dropdown-item (click)="playTrack()">Play</dui-dropdown-item>
@@ -14,7 +14,11 @@
     <dui-dropdown-splitter></dui-dropdown-splitter>
     <dui-dropdown-item (click)="actionTrigged('removeFile')">Delete Track</dui-dropdown-item>
   </dui-dropdown>
-  <dui-table-column header="" [width]="30"></dui-table-column>
+  <dui-table-column header="Art" [width]="30">
+    <ng-container *duiTableCell="let track">
+        <dui-icon style="margin-bottom: 25px;" *ngIf="track.artwork" name="record"></dui-icon>
+      </ng-container>
+  </dui-table-column>
   <dui-table-column name="title" header="Title" [width]="400"></dui-table-column>
   <dui-table-column name="artist" header="Artist" [width]="300"></dui-table-column>
   <dui-table-column name="time" header="Time" [width]="50"></dui-table-column>

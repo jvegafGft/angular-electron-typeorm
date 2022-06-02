@@ -10,6 +10,8 @@ import { AppConfig } from '../environments/environment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  trackDetailed: Track = null;
+
   constructor(private repository: TrackRepositoryService, private translate: TranslateService) {
     this.translate.setDefaultLang('en');
     console.log('AppConfig', AppConfig);
@@ -27,6 +29,24 @@ export class AppComponent {
   }
 
   openDetailDialog(t: Track): void {
-    console.log(`open dialog: ${t.title}`);
+    console.log(`showDetail: ${t.title}`);
+    this.trackDetailed = this.repository.getTrack(t.id);
+  }
+
+  fetchDetailArtworks(): void {
+    console.log('detail fetch arts');
+  }
+
+  onDetailFixTags(): void {
+    console.log('detail fix tags');
+  }
+
+  onSaveChanges(): void {
+    console.log(`save changes of ${this.trackDetailed.title}`);
+    this.onCloseDetail();
+  }
+
+  onCloseDetail(): void {
+    this.trackDetailed = null;
   }
 }

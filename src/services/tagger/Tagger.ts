@@ -42,7 +42,6 @@ const SearchOnBeatport = async (track: Track): Promise<MatchResult | null> => {
   const trackTokens = GetStringTokens(reqAggregate);
   const durRounded = Math.round(duration);
   const bpResults = await SearchTags(title, artist);
-  console.log(`TOTAL BP RESULTS: ${bpResults.length}`);
   if (bpResults.length < 1) {
     return null;
   }
@@ -50,6 +49,9 @@ const SearchOnBeatport = async (track: Track): Promise<MatchResult | null> => {
     result => result.duration >= durRounded - 10 && result.duration <= durRounded + 10
   );
   console.log(`BP RESULTS FILTERED: ${resultsFiltered.length}`);
+  if (resultsFiltered.length < 1) {
+    return null;
+  }
   if (resultsFiltered.length < 2) {
     return {
       tag: resultsFiltered[0],
@@ -78,13 +80,12 @@ const GetWebTrackInfo = async (track: Track): Promise<void> => {
 const FixTags = async (track: Track): Promise<Track> => {
   const result = await SearchOnBeatport(track);
   if (result === null) {
-    GetWebTrackInfo(track);
+    // GetWebTrackInfo(track);
+    console.log(`no result found for ${track.title}`);
     return track;
   }
 
-  const updated = Update(track, result.tag);
-  console.log(`track updated: ${updated.title}`);
-  return updated;
+  return await Update(track, result.tag);
 };
 
 export default FixTags;

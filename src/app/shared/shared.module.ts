@@ -17,11 +17,11 @@ import {
 } from '@marcj/angular-desktop-ui';
 import { TranslateModule } from '@ngx-translate/core';
 import { AudioService, ElectronService, TrackRepositoryService } from '../core/services';
-import { HeaderComponent, PlayerComponent, TracklistComponent } from './components';
+import { HeaderComponent, PlayerComponent, TracklistComponent, DetailDialogComponent } from './components';
 import { WebviewDirective } from './directives/';
 
 @NgModule({
-  declarations: [WebviewDirective, HeaderComponent, TracklistComponent, PlayerComponent],
+  declarations: [WebviewDirective, HeaderComponent, TracklistComponent, PlayerComponent, DetailDialogComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -40,7 +40,15 @@ import { WebviewDirective } from './directives/';
     DuiEmojiModule,
     DuiSliderModule,
   ],
-  exports: [TranslateModule, WebviewDirective, FormsModule, HeaderComponent, TracklistComponent, PlayerComponent],
+  exports: [
+    TranslateModule,
+    WebviewDirective,
+    FormsModule,
+    HeaderComponent,
+    TracklistComponent,
+    PlayerComponent,
+    DetailDialogComponent,
+  ],
   providers: [TrackRepositoryService, ElectronService, AudioService],
 })
 export class SharedModule {}
